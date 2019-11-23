@@ -1,5 +1,8 @@
 package com.selimabbas.photoalbum.di
 
-import org.koin.dsl.module.Module
+import com.selimabbas.remote.di.createRemoteModule
 
-val appComponent = listOf<Module>()
+
+val appComponent = listOf(
+    createRemoteModule("http://jsonplaceholder.typicode.com/")
+)
