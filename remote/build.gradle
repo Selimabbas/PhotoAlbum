@@ -28,6 +28,8 @@ android {
 dependencies {
     def retrofit = "2.6.2"
     def koin = "2.0.1"
+    def androidJunit = '1.1.1'
+    def mockitoKotlin = "2.1.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -39,4 +41,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
+
+    // Testing
+    testImplementation "androidx.test.ext:junit:$androidJunit"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlin"
 }
