@@ -11,7 +11,6 @@ class PhotoAdapter : ListAdapter<Photo, PhotoViewHolder>(DiffCallback()) {
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) =
         holder.bind(getItem(position))
-
 }
 
 private class DiffCallback : DiffUtil.ItemCallback<Photo>() {
