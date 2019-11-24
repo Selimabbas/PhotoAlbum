@@ -29,6 +29,9 @@ dependencies {
     def constraintLayout = "1.1.3"
     def appCompat = "1.1.0"
     def koin = "2.0.1"
+    def cardView = "1.0.0"
+    def swipeRefreshLayout = "1.0.0"
+    def glide = "4.10.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -41,6 +44,22 @@ dependencies {
 
     // Constraint layout
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+
+    // RecyclerView to show list of views
+    implementation "androidx.recyclerview:recyclerview:$appCompat"
+
+    // Layout allowing swipe to refresh.
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayout"
+
+    // CardView used in the album
+    implementation "androidx.cardview:cardview:$cardView"
+
+    // SnackBar
+    implementation "com.google.android.material:material:1.0.0"
+
+    // Glide (image loading)
+    implementation "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 
     // KOIN (Dependency injection)
     implementation "org.koin:koin-android:$koin"

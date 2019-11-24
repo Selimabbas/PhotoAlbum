@@ -1,6 +1,5 @@
 package com.selimabbas.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.selimabbas.remote.PhotoDataSource
 import com.selimabbas.repository.model.Photo
@@ -14,7 +13,7 @@ interface PhotoRepository {
     /**
      * Load list of photos as a LiveData.
      */
-    fun getPhotos(): LiveData<Resource<List<Photo>>>
+    fun getPhotos(): MutableLiveData<Resource<List<Photo>>>
 
     /**
      * Cancel current rx operations.
@@ -25,11 +24,11 @@ interface PhotoRepository {
 class PhotoRepositoryImpl(private val dataSource: PhotoDataSource) : PhotoRepository {
     private val compositeDisposable = CompositeDisposable()
 
-    override fun getPhotos(): LiveData<Resource<List<Photo>>> {
+    override fun getPhotos(): MutableLiveData<Resource<List<Photo>>> {
         val liveData = MutableLiveData<Resource<List<Photo>>>(
             Resource(Status.LOADING, null, null)
         )
-
+        compositeDisposable.clear()
         compositeDisposable.add(dataSource.getPhotos()
             .subscribeOn(Schedulers.io())
             .map { it.toPresentation() }

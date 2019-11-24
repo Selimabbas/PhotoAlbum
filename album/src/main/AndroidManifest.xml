@@ -2,6 +2,6 @@
     package="com.selimabbas.album" >
 
     <application>
-        <activity android:name=".AlbumActivity" />
+        <activity android:name=".view.AlbumActivity" />
     </application>
 </manifest>

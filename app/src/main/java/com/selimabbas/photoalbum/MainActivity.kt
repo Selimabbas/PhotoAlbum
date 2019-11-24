@@ -3,7 +3,7 @@ package com.selimabbas.photoalbum
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.selimabbas.album.AlbumActivity
+import com.selimabbas.album.view.AlbumActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
