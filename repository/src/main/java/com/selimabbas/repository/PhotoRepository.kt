@@ -1,9 +1,12 @@
 package com.selimabbas.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.selimabbas.remote.PhotoDataSource
+import com.selimabbas.local.datasource.PhotoLocalDataSource
+import com.selimabbas.remote.datasource.PhotoRemoteDataSource
 import com.selimabbas.repository.model.Photo
-import com.selimabbas.repository.model.toPresentation
+import com.selimabbas.repository.model.entityToLocal
+import com.selimabbas.repository.model.entityToPresentation
+import com.selimabbas.repository.model.localToPresentation
 import com.selimabbas.repository.utils.Resource
 import com.selimabbas.repository.utils.Status
 import io.reactivex.disposables.CompositeDisposable
@@ -21,7 +24,10 @@ interface PhotoRepository {
     fun cancelOperations()
 }
 
-class PhotoRepositoryImpl(private val dataSource: PhotoDataSource) : PhotoRepository {
+class PhotoRepositoryImpl(
+    private val remoteDataSource: PhotoRemoteDataSource,
+    private val localDataSource: PhotoLocalDataSource
+) : PhotoRepository {
     private val compositeDisposable = CompositeDisposable()
 
     override fun getPhotos(): MutableLiveData<Resource<List<Photo>>> {
@@ -29,14 +35,22 @@ class PhotoRepositoryImpl(private val dataSource: PhotoDataSource) : PhotoReposi
             Resource(Status.LOADING, null, null)
         )
         compositeDisposable.clear()
-        compositeDisposable.add(dataSource.getPhotos()
-            .subscribeOn(Schedulers.io())
-            .map { it.toPresentation() }
-            .subscribe({ liveData.postValue(Resource(Status.SUCCESS, it, null)) },
-                {
-                    //                    val dbResult = loadFromDb()
-                    liveData.postValue(Resource(Status.FAILURE, null, it))
-                })
+        compositeDisposable.add(
+            remoteDataSource.getPhotos()
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    liveData.postValue(
+                        Resource(Status.SUCCESS, it.entityToPresentation(), null)
+                    )
+                    localDataSource.savePhotos(it.entityToLocal())
+                },
+                    {
+                        // When the call to api fails we try first to load the photos from the database.
+                        val dbResult = localDataSource.getPhotos()
+                        val data =
+                            if (dbResult.isNotEmpty()) dbResult.localToPresentation() else null
+                        liveData.postValue(Resource(Status.FAILURE, data, it))
+                    })
         )
         return liveData
     }

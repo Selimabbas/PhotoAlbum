@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
@@ -26,6 +28,24 @@ android {
 }
 
 dependencies {
+    def room = "2.2.2"
+    def koin = "2.0.1"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Room (persistence library)
+    implementation "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
+
+    // RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room"
+
+    // Room testing
+    testImplementation "androidx.room:room-testing:$room"
+
+    // KOIN (Dependency injection)
+    implementation "org.koin:koin-android:$koin"
+    implementation "org.koin:koin-androidx-viewmodel:$koin"
+
 }

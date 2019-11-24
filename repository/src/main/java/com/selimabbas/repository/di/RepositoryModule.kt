@@ -5,5 +5,5 @@ import com.selimabbas.repository.PhotoRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory { PhotoRepositoryImpl(get()) as PhotoRepository }
+    factory { PhotoRepositoryImpl(get(), get()) as PhotoRepository }
 }

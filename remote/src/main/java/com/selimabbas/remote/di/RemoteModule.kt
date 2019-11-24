@@ -1,9 +1,9 @@
 package com.selimabbas.remote.di
 
-import com.selimabbas.remote.PhotoApi
-import com.selimabbas.remote.PhotoDataSource
-import com.selimabbas.remote.PhotoDataSourceImpl
+import com.selimabbas.remote.api.PhotoApi
 import com.selimabbas.remote.createNetwork
+import com.selimabbas.remote.datasource.PhotoRemoteDataSource
+import com.selimabbas.remote.datasource.PhotoRemoteDataSourceImpl
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -12,5 +12,5 @@ fun createRemoteModule(baseUrl: String) = module {
 
     factory { get<Retrofit>().create(PhotoApi::class.java) }
 
-    factory { PhotoDataSourceImpl(get()) as PhotoDataSource }
+    factory { PhotoRemoteDataSourceImpl(get()) as PhotoRemoteDataSource }
 }

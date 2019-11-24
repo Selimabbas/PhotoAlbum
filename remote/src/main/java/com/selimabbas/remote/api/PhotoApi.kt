@@ -1,4 +1,4 @@
-package com.selimabbas.remote
+package com.selimabbas.remote.api
 
 import com.selimabbas.remote.model.PhotoEntity
 import io.reactivex.Single

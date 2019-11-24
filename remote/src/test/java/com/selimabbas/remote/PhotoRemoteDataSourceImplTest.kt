@@ -3,14 +3,17 @@ package com.selimabbas.remote
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.selimabbas.remote.api.PhotoApi
+import com.selimabbas.remote.datasource.PhotoRemoteDataSourceImpl
 import com.selimabbas.remote.model.PhotoEntity
 import io.reactivex.Single
 import org.junit.Test
 
-class PhotoDataSourceImplTest {
+class PhotoRemoteDataSourceImplTest {
 
     private val photoApiMock: PhotoApi = mock()
-    private val dataSource = PhotoDataSourceImpl(photoApiMock)
+    private val dataSource =
+        PhotoRemoteDataSourceImpl(photoApiMock)
 
     private val photoList = listOf(
         PhotoEntity(

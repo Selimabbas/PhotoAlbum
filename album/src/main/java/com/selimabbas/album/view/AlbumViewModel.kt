@@ -38,9 +38,12 @@ class AlbumViewModel(private val repository: PhotoRepository) : ViewModel() {
         photosSource = repository.getPhotos()
         _photos.addSource(photosSource) {
             when (it.status) {
-                Status.LOADING -> _photos.value = it.data
-                Status.SUCCESS -> _photos.value = it.data
-                Status.FAILURE -> setErrorMessage(it.error)
+                Status.LOADING -> return@addSource // No loading animation so we do nothing
+                Status.SUCCESS -> it.data?.let { data -> _photos.value = data }
+                Status.FAILURE -> {
+                    it.data?.let { data -> _photos.value = data }
+                    setErrorMessage(it.error)
+                }
             }
         }
     }

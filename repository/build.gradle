@@ -40,6 +40,7 @@ dependencies {
 
     // Modules
     implementation project(":remote")
+    implementation project(":local")
 
     // LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"

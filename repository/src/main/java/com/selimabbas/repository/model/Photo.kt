@@ -1,5 +1,6 @@
 package com.selimabbas.repository.model
 
+import com.selimabbas.local.model.PhotoLocal
 import com.selimabbas.remote.model.PhotoEntity
 
 data class Photo(
@@ -7,5 +8,10 @@ data class Photo(
     val url: String? = null
 )
 
-fun List<PhotoEntity>.toPresentation() =
-    map { Photo(it.title, it.url) }
+fun List<PhotoEntity>.entityToPresentation() = map { Photo(it.title, it.url) }
+
+fun List<PhotoLocal>.localToPresentation() = map { Photo(it.title, it.url) }
+
+fun List<PhotoEntity>.entityToLocal() = map {
+    PhotoLocal(it.albumId, it.id, it.title, it.url, it.thumbnailUrl)
+}
