@@ -5,21 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.selimabbas.album.R
 import com.selimabbas.album.adapter.PhotoAdapter
 import kotlinx.android.synthetic.main.activity_album.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-
 class AlbumActivity : AppCompatActivity() {
     private val vm: AlbumViewModel by viewModel()
 
-    private val adapter = PhotoAdapter(
+    private val adapter = PhotoAdapter()
 
-    )
+    private var snackBar: Snackbar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.selimabbas.album.R.layout.activity_album)
+        setContentView(R.layout.activity_album)
         initRecyclerView()
         observePhotos()
         observeError()
@@ -39,6 +39,7 @@ class AlbumActivity : AppCompatActivity() {
      */
     private fun observePhotos() {
         vm.photos.observe(this, Observer {
+            snackBar?.dismiss()
             swipeRefresh.isRefreshing = false
             adapter.submitList(it)
         })
@@ -51,9 +52,9 @@ class AlbumActivity : AppCompatActivity() {
         vm.errorMessage.observe(this, Observer {
             swipeRefresh.isRefreshing = false
             it.getContentIfNotHandled()?.let { textId ->
-                Snackbar.make(content, getString(textId), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(getString(com.selimabbas.album.R.string.retry)) { vm.refreshPhotos() }
-                    .show()
+                snackBar = Snackbar.make(content, getString(textId), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.retry)) { vm.refreshPhotos() }
+                snackBar?.show()
             }
         })
     }

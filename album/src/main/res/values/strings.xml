@@ -2,4 +2,5 @@
     <string name="app_name">Album</string>
     <string name="error_occurred">An error occurred</string>
     <string name="retry">Retry</string>
+    <string name="dismiss">Dismiss</string>
 </resources>
