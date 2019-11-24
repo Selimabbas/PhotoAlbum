@@ -33,10 +33,10 @@ class PhotoRepositoryImpl(private val dataSource: PhotoDataSource) : PhotoReposi
         compositeDisposable.add(dataSource.getPhotos()
             .subscribeOn(Schedulers.io())
             .map { it.toPresentation() }
-            .subscribe({ liveData.value = Resource(Status.SUCCESS, it, null) },
+            .subscribe({ liveData.postValue(Resource(Status.SUCCESS, it, null)) },
                 {
                     //                    val dbResult = loadFromDb()
-                    liveData.value = Resource(Status.FAILURE, null, it)
+                    liveData.postValue(Resource(Status.FAILURE, null, it))
                 })
         )
         return liveData

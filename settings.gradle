@@ -1,2 +1,2 @@
-include ':app', ':remote', ':local'
+include ':app', ':remote', ':local', ':album', ':repository'
 rootProject.name='PhotoAlbum'

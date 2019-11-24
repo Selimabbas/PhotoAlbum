@@ -1,4 +1,4 @@
-package com.selimabbas.remote
+package com.selimabbas.album
 
 import org.junit.Test
 

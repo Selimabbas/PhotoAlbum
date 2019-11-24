@@ -8,7 +8,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 fun createRemoteModule(baseUrl: String) = module {
-    createNetwork(baseUrl)
+    single { createNetwork(baseUrl) }
 
     factory { get<Retrofit>().create(PhotoApi::class.java) }
 
