@@ -1,4 +1,4 @@
-package com.selimabbas.photoalbum
+package com.selimabbas.repository
 
 import org.junit.Test
 
