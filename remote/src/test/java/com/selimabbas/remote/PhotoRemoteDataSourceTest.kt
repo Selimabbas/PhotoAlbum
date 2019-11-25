@@ -9,7 +9,7 @@ import com.selimabbas.remote.model.PhotoEntity
 import io.reactivex.Single
 import org.junit.Test
 
-class PhotoRemoteDataSourceImplTest {
+class PhotoRemoteDataSourceTest {
 
     private val photoApiMock: PhotoApi = mock()
     private val dataSource =

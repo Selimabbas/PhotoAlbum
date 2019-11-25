@@ -30,6 +30,10 @@ android {
 dependencies {
     def room = "2.2.2"
     def koin = "2.0.1"
+    def runner = "1.1.1"
+    def junit = "1.1.1"
+    def androidTestRunner = "1.2.0"
+    def espressoCore = "3.2.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -41,11 +45,25 @@ dependencies {
     // RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room"
 
-    // Room testing
-    testImplementation "androidx.room:room-testing:$room"
-
     // KOIN (Dependency injection)
     implementation "org.koin:koin-android:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
+
+    // Tests
+
+    // Room testing
+    testImplementation "androidx.room:room-testing:$room"
+
+    // Koin testing
+    testImplementation "org.koin:koin-test:$koin"
+    androidTestImplementation "org.koin:koin-test:$koin"
+
+    testImplementation "androidx.test:runner:$runner"
+
+    testImplementation "androidx.test.ext:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$junit"
+
+    androidTestImplementation "androidx.test:runner:$androidTestRunner"
+    testImplementation "androidx.test:runner:$androidTestRunner"
 
 }
