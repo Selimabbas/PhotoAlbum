@@ -33,7 +33,6 @@ dependencies {
     def runner = "1.1.1"
     def junit = "1.1.1"
     def androidTestRunner = "1.2.0"
-    def espressoCore = "3.2.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -49,7 +48,7 @@ dependencies {
     implementation "org.koin:koin-android:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
 
-    // Tests
+    // Testing libraries
 
     // Room testing
     testImplementation "androidx.room:room-testing:$room"

@@ -17,7 +17,7 @@ class AlbumViewModel(private val repository: PhotoRepository) : ViewModel() {
     private var photosSource: LiveData<Resource<List<Photo>>> = MutableLiveData()
 
     private val _errorMessage = MutableLiveData<Event<Int>>()
-    val errorMessage get() = _errorMessage
+    val errorMessage: LiveData<Event<Int>> get() = _errorMessage
 
     init {
         loadPhotos()
@@ -53,11 +53,7 @@ class AlbumViewModel(private val repository: PhotoRepository) : ViewModel() {
      */
     private fun setErrorMessage(error: Throwable?) {
         _errorMessage.value = error?.let {
-            /*
-                        when (it) {
-                            is HttpRetryException ->
-                        }
-            */
+            // possibility to handle different server errors with different messages.
             Event(R.string.error_occurred)
         } ?: Event(R.string.error_occurred)
 

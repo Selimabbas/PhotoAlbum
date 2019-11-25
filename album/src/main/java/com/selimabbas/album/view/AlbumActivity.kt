@@ -3,7 +3,7 @@ package com.selimabbas.album.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.selimabbas.album.R
 import com.selimabbas.album.adapter.PhotoAdapter
@@ -30,7 +30,7 @@ class AlbumActivity : AppCompatActivity() {
      * Create RecyclerView adapter.
      */
     private fun initRecyclerView() {
-        photoRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        photoRecyclerView.layoutManager = LinearLayoutManager(this)
         photoRecyclerView.adapter = adapter
     }
 

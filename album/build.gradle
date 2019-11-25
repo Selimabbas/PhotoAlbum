@@ -32,6 +32,11 @@ dependencies {
     def cardView = "1.0.0"
     def swipeRefreshLayout = "1.0.0"
     def glide = "4.10.0"
+    def runner = "1.1.1"
+    def junit = "1.1.1"
+    def androidTestRunner = "1.2.0"
+    def archCoreTest = "2.0.0"
+    def mockk = "1.9.2"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -64,4 +69,27 @@ dependencies {
     // KOIN (Dependency injection)
     implementation "org.koin:koin-android:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
+
+
+    // Testing libraries
+
+    // Koin testing
+    testImplementation "org.koin:koin-test:$koin"
+    androidTestImplementation "org.koin:koin-test:$koin"
+
+    testImplementation "androidx.test:runner:$runner"
+
+    testImplementation "androidx.test.ext:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$junit"
+
+    androidTestImplementation "androidx.test:runner:$androidTestRunner"
+    testImplementation "androidx.test:runner:$androidTestRunner"
+
+    // Test ViewModels
+    androidTestImplementation "androidx.arch.core:core-testing:$archCoreTest"
+    testImplementation "androidx.arch.core:core-testing:$archCoreTest"
+
+    // Mock objects
+    testImplementation "io.mockk:mockk:$mockk"
+    androidTestImplementation "io.mockk:mockk-android:$mockk"
 }
