@@ -42,5 +42,6 @@ dependencies {
 
     // KOIN (Dependency injection)
     implementation "org.koin:koin-android:$koin"
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 
 }
